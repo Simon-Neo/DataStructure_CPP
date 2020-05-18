@@ -1,16 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Default">
       <UniqueIdentifier>{b5625ce1-ddbd-48a5-89e2-9f55266d77e6}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ReadMe.txt" />
+    <Filter Include="BaseArray">
+      <UniqueIdentifier>{35846954-610d-4575-a4b2-82ad1323e825}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Default\리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Sort">
+      <UniqueIdentifier>{db39e18b-1fd2-4a08-9d60-bd3966a4d2fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sort\MergerSort">
+      <UniqueIdentifier>{df186d3e-6c85-4c44-a514-10b91b79ecf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sort\HeapSort">
+      <UniqueIdentifier>{10fad662-f57c-402e-896c-cdac916ec59a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{d118169f-87d5-409e-93cd-7fbc95120147}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -19,11 +31,42 @@
     <ClInclude Include="targetver.h">
       <Filter>Default</Filter>
     </ClInclude>
+    <ClInclude Include="BaseArray.h">
+      <Filter>BaseArray</Filter>
+    </ClInclude>
+    <ClInclude Include="MergerSort.h">
+      <Filter>Sort\MergerSort</Filter>
+    </ClInclude>
+    <ClInclude Include="Base.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="HeapSort.h">
+      <Filter>Sort\HeapSort</Filter>
+    </ClInclude>
+    <ClInclude Include="DegreeSort.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Default</Filter>
     </ClCompile>
     <ClCompile Include="DataStructure.cpp" />
+    <ClCompile Include="BaseArray.cpp">
+      <Filter>BaseArray</Filter>
+    </ClCompile>
+    <ClCompile Include="MergerSort.cpp">
+      <Filter>Sort\MergerSort</Filter>
+    </ClCompile>
+    <ClCompile Include="Base.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="HeapSort.cpp">
+      <Filter>Sort\HeapSort</Filter>
+    </ClCompile>
+    <ClCompile Include="DegreeSort.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt">
+      <Filter>Default</Filter>
+    </Text>
   </ItemGroup>
 </Project>

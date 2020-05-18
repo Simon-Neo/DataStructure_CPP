@@ -9,10 +9,41 @@
 
 #include <stdio.h>
 #include <tchar.h>
-
+#include <iostream>
 
 
 // TODO: 프로그램에 필요한 추가 헤더는 여기에서 참조합니다.
-
+#pragma comment(lib, "user32.lib")
 
 using namespace std;
+
+template<typename T>
+static void Safe_Delete(T *& rpPtr, bool bIsArray = false)
+{
+	if (nullptr != rpPtr)
+	{
+		if (bIsArray)
+			delete[] rpPtr;
+		else
+			delete rpPtr;
+	}
+}
+
+template<typename T>
+static inline void Swap(T & rA, T & rB)
+{
+	T tTemp = rA;
+	rA = rB;
+	rB = tTemp;
+}
+
+template<typename T>
+static void Array_Render(const T pArray[], int iSize = -1)
+{
+	cout << "{";
+	for (int i = 0; i < iSize - 1; ++i)
+	{
+		cout << pArray[i] << " ";
+	}
+	cout <<pArray[iSize - 1] << "}" << endl;
+}
