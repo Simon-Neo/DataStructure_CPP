@@ -8,6 +8,7 @@
 
 // MyClass
 #include "BaseArray.h"
+#include "Set.h"
 
 
 int Compare(const int& rA, const int& rB)
@@ -24,19 +25,38 @@ int Compare(const int& rA, const int& rB)
 int main()
 {
 	srand(unsigned int(time(nullptr)));
+	
+	CSet* pSet_A = new CSet(5);
 
-	CBaseArray cBaseArray(10, true); 
+	pSet_A->Add(1);
+	pSet_A->Add(7);
+	pSet_A->Add(5);
+	pSet_A->Add(5);
+	pSet_A->Add(10);
+	pSet_A->Add(77);
 
-	cout << "--------------Before----------" << endl;
-	cBaseArray.Render();
+	pSet_A->Remove(5);
+
+	pSet_A->Print();
+
+	CSet* pSet_B = new CSet(10);
+	pSet_B->Add(2);
+	pSet_B->Add(5);
+	pSet_B->Add(7);
+	cout << "BBBBBBBBBBBBB" << endl;
+	pSet_B->Print();
+	
+	//cout << "Equal = " << (pSet_B->Equal(*pSet_A) ? "Equal" : "Not Equal") << endl;
+
+	CSet cIntersection = (*pSet_A) - (*pSet_B);
+	cIntersection.Print();
+
+	Safe_Delete(pSet_A);
+	Safe_Delete(pSet_B);
+	
 
 
-	cBaseArray.Degree();
-	cBaseArray.Render();
-
-	cout << "--------------After----------" << endl;
-	cBaseArray.Render();
-
+	
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     return 0;
 }

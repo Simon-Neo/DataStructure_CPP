@@ -26,6 +26,8 @@ static void Safe_Delete(T *& rpPtr, bool bIsArray = false)
 			delete[] rpPtr;
 		else
 			delete rpPtr;
+
+		rpPtr = nullptr;
 	}
 }
 

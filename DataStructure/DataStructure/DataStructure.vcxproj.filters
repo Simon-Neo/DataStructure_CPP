@@ -23,6 +23,9 @@
     <Filter Include="Base">
       <UniqueIdentifier>{d118169f-87d5-409e-93cd-7fbc95120147}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Set">
+      <UniqueIdentifier>{c2cab53b-c3c6-44fb-88e8-5dc7311c0e0e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -44,6 +47,9 @@
       <Filter>Sort\HeapSort</Filter>
     </ClInclude>
     <ClInclude Include="DegreeSort.h" />
+    <ClInclude Include="Set.h">
+      <Filter>Set</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -63,6 +69,9 @@
       <Filter>Sort\HeapSort</Filter>
     </ClCompile>
     <ClCompile Include="DegreeSort.cpp" />
+    <ClCompile Include="Set.cpp">
+      <Filter>Set</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt">
