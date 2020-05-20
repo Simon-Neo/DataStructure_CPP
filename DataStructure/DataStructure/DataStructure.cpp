@@ -30,31 +30,32 @@ int main()
 
 	pSet_A->Add(1);
 	pSet_A->Add(7);
-	pSet_A->Add(5);
-	pSet_A->Add(5);
-	pSet_A->Add(10);
-	pSet_A->Add(77);
 
-	pSet_A->Remove(5);
 
+	cout << "AAAAAAAAAA" << endl;
 	pSet_A->Print();
 
-	CSet* pSet_B = new CSet(10);
-	pSet_B->Add(2);
-	pSet_B->Add(5);
+	CSet* pSet_B = new CSet(7);
+	pSet_B->Add(1);
 	pSet_B->Add(7);
-	cout << "BBBBBBBBBBBBB" << endl;
+	pSet_B->Add(5);
+	pSet_B->Add(8);
+	pSet_B->Add(0);
+	pSet_B->Add(4);
+	cout << "BBBBBBB" << endl;
 	pSet_B->Print();
 	
 	//cout << "Equal = " << (pSet_B->Equal(*pSet_A) ? "Equal" : "Not Equal") << endl;
 
-	CSet cIntersection = (*pSet_A) - (*pSet_B);
-	cIntersection.Print();
+	cout << "Result ============= B" << endl;
+	if (pSet_A->IsProperSubset(*pSet_B))
+		cout << "Subset" << endl;
+	else
+		cout << "Not Subset" << endl;
+	//cIntersection.Print();
 
 	Safe_Delete(pSet_A);
 	Safe_Delete(pSet_B);
-	
-
 
 	
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);

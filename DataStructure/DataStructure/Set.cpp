@@ -55,7 +55,7 @@ int CSet::Initialize(int iMax)
 	return 1;
 }
 
-int CSet::IsMember(int iData)
+int CSet::IsMember(int iData) const 
 {
 	if (IsSetArrayNull())
 		return 0;
@@ -139,10 +139,16 @@ int CSet::Size() const
 
 void CSet::Assign(const CSet & rSet)
 {
-	Release();
-	Initialize(rSet.Capacity());
-	m_iIndex = rSet.Size();
-	for (int i = 0; i < m_iIndex; ++i)
+	int iSize = rSet.Size();
+	if (rSet.Size() > m_iMax) 
+	{
+		// input Array bigger then me
+		Release();
+		Initialize(iSize);
+	}
+	
+	m_iIndex = iSize;
+	for (int i = 0; i < iSize; ++i)
 		m_pArrSet[i] = rSet.m_pArrSet[i];
 }
 
@@ -150,52 +156,29 @@ int CSet::Equal(const CSet & rSet)
 {
 	if (m_iIndex != rSet.m_iIndex)
 		return 0;
-
+	int j = 0;
 	for (int i = 0; i < m_iIndex; ++i)
 	{
-		if (m_pArrSet[i] != rSet.m_pArrSet[i])
-			return 0;
+		for (j = 0; j < rSet.m_iIndex; ++j)
+			if (m_pArrSet[i] == rSet.m_pArrSet[j]) // same _> break
+				break;
+		if (j >= rSet.m_iIndex)
+			return  0;
 	}
 	return 1;
 }
 
 CSet CSet::Union(const CSet & rSet)
 {
-	int iMax = m_iIndex;
-	CSet* cTemp = new CSet(rSet.Size());
+	CSet cOnly_B = rSet - *this;
 
-	int iSameVal = -1;
-	for (int i = 0; i < rSet.m_iIndex; ++i)
-	{
-		for (int j = 0; j < m_iIndex; ++j)
-		{
-			if (rSet.m_pArrSet[i] == m_pArrSet[j])
-			{
-				iSameVal = -1;
-				break;
-			}
-			iSameVal = rSet.m_pArrSet[i];
-		}
-		if (-1 != iSameVal)
-		{
-			++iMax;
-			cTemp->Add(iSameVal);
-		}
-	}
+	CSet cResult = CSet(cOnly_B.m_iIndex + m_iIndex);
+	cResult.Assign(*this);
 
-	CSet cSet(iMax);
-	for (int i = 0; i < m_iIndex; ++i)
-	{
-		cSet.Add(m_pArrSet[i]);
-	}
+	for (int i = 0; i < cOnly_B.m_iIndex; ++i)
+		cResult.Add(cOnly_B.m_pArrSet[i]);
 
-	for (int i = 0; i < cTemp->Size(); ++i)
-	{
-		cSet.Add(cTemp->m_pArrSet[i]);
-	}
-
-	Safe_Delete(cTemp);
-	return cSet;
+	return cResult;
 }
 
 CSet CSet::Intersection(const CSet & rSet)
@@ -254,3 +237,72 @@ void CSet::Release()
 	m_iMax = 0;
 	m_iIndex = 0;
 }
+
+CSet CSet::symmetricDifference(const CSet & rSet)
+{
+	CSet&& rrDiffer_A = (*this) - rSet;
+	CSet&& rrDiffer_B = rSet - (*this);
+
+	CSet cNew = rrDiffer_A.Union(rrDiffer_B);
+	return cNew;
+}
+
+CSet * CSet::ToUnion(const CSet & rSet)
+{
+	// ★★ 간단하게 해결해버리시네.. 너무 내가엉렵ㄱ ㅔ생각해버림.
+	for (int i = 0; i < rSet.m_iIndex; ++i)
+		Add(rSet.m_pArrSet[i]);
+
+	return this;
+}
+
+CSet * CSet::ToIntersection(const CSet & rSet)
+{
+	for (int i = 0; i < m_iIndex; ++i)
+	{
+		if (-1 == rSet.IsMember(m_pArrSet[i]))
+			// No Is Memeber A Value in B Array
+			m_pArrSet[i--] = m_pArrSet[--m_iIndex];
+	}
+
+	return this;
+}
+
+CSet * CSet::ToDifference(const CSet & rSet)
+{
+	// ★★ 아놔 ...
+
+	for (int i = 0; i < rSet.m_iIndex; ++i)
+	{
+		Remove(rSet.m_pArrSet[i]);
+	}
+
+	//for (int i = 0; i < m_iIndex; ++i)
+	//{
+	//	if (-1 != rSet.IsMember(m_pArrSet[i]))
+	//	{
+	//		m_pArrSet[i--] = m_pArrSet[--m_iIndex];
+	//	}
+	//}
+	return this;
+}
+
+int CSet::IsSubset(const CSet & rSet)
+{
+	int j = 0;
+	for (int i = 0; i < m_iIndex; ++i)
+	{
+		if (rSet.IsMember(m_pArrSet[i]) == -1)
+			return 0;
+	}
+	return 1;
+}
+
+int CSet::IsProperSubset(const CSet & rSet)
+{
+	if (m_iIndex == rSet.m_iIndex)
+		return 0;
+	
+	return IsSubset(rSet);
+}
+

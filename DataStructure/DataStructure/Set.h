@@ -11,7 +11,7 @@ public:
 	~CSet();
 public:
 	int Initialize(int iMax);
-	int IsMember(int iData);
+	int IsMember(int iData) const;
 	void Add(int iData);
 	void Remove(int iData);
 
@@ -31,6 +31,19 @@ public:
 	void Print();
 
 	void Release();
+
+
+	// --- Practice Question 
+	void Clear() { m_iIndex = 0; };
+
+	CSet symmetricDifference(const CSet& rSet);
+	CSet* ToUnion(const CSet& rSet);
+	CSet* ToIntersection(const CSet& rSet);
+	CSet* ToDifference(const CSet& rSet);
+
+	int IsSubset(const CSet& rSet);
+	int IsProperSubset(const CSet& rSet);
+
 private:
 	int m_iMax = 0;
 	int m_iIndex = 0;
