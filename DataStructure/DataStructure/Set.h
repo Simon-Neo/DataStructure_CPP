@@ -1,6 +1,5 @@
 #pragma once
 
-
 class CSet
 {
 public:
@@ -32,6 +31,7 @@ public:
 
 	void Release();
 
+	
 
 	// --- Practice Question 
 	void Clear() { m_iIndex = 0; };
@@ -44,6 +44,10 @@ public:
 	int IsSubset(const CSet& rSet);
 	int IsProperSubset(const CSet& rSet);
 
+	void QuickSort(int iArray[], int iL, int iR);
+
+private:
+	int BinarySearch(int iArray[], int iL, int iR, int iInput) const;
 private:
 	int m_iMax = 0;
 	int m_iIndex = 0;

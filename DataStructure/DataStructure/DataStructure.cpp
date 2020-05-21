@@ -28,8 +28,10 @@ int main()
 	
 	CSet* pSet_A = new CSet(5);
 
-	pSet_A->Add(1);
+	pSet_A->Add(99);
 	pSet_A->Add(7);
+	pSet_A->Add(0);
+	pSet_A->Add(5);
 
 
 	cout << "AAAAAAAAAA" << endl;
@@ -38,21 +40,20 @@ int main()
 	CSet* pSet_B = new CSet(7);
 	pSet_B->Add(1);
 	pSet_B->Add(7);
-	pSet_B->Add(5);
+	pSet_B->Add(55);
 	pSet_B->Add(8);
-	pSet_B->Add(0);
-	pSet_B->Add(4);
+	pSet_B->Add(99);
+	pSet_B->Add(77);
 	cout << "BBBBBBB" << endl;
 	pSet_B->Print();
 	
 	//cout << "Equal = " << (pSet_B->Equal(*pSet_A) ? "Equal" : "Not Equal") << endl;
 
-	cout << "Result ============= B" << endl;
-	if (pSet_A->IsProperSubset(*pSet_B))
-		cout << "Subset" << endl;
+	if (pSet_B->IsMember(55) == -1)
+		cout << "Is not in" << endl;
 	else
-		cout << "Not Subset" << endl;
-	//cIntersection.Print();
+		cout << "Is in" << endl;
+
 
 	Safe_Delete(pSet_A);
 	Safe_Delete(pSet_B);

@@ -60,22 +60,32 @@ int CSet::IsMember(int iData) const
 	if (IsSetArrayNull())
 		return 0;
 
-	for (int i = 0; i < m_iIndex; ++i)
-		if (iData == m_pArrSet[i])
-			return i;
+	return BinarySearch(m_pArrSet, 0, m_iIndex - 1, iData);
 
-	return -1;
+	//(m_iIndex - 1) / 2;
+
+	//for (int i = 0; i < m_iIndex; ++i)
+	//	if (iData == m_pArrSet[i])
+	//		return i;
+
+	//return -1;
 }
 
 void CSet::Add(int iData)
 {
 	if (IsSetArrayNull())
-		return ;
-
-	if (IsFull() || IsMember(iData) != -1) // ¡Ú¡Ú
 		return;
 
+	if (m_iIndex != 0)
+	{
+		if (IsFull() || IsMember(iData) != -1) // ¡Ú¡Ú
+			return;
+	}
+
 	m_pArrSet[m_iIndex++] = iData;
+
+	// Quick Sort
+	QuickSort(m_pArrSet, 0, m_iIndex - 1);
 }
 
 void CSet::Remove(int iData)
@@ -86,6 +96,10 @@ void CSet::Remove(int iData)
 	int iCheckIndex = 0;
 	if ((iCheckIndex = IsMember(iData)) != -1)// ¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú ¾Æ³ö .. ÀÌ¶ÈŒQÀÌ..¤»
 		m_pArrSet[iCheckIndex] = m_pArrSet[--m_iIndex];
+
+	// Quick Sort
+	QuickSort(m_pArrSet, 0, m_iIndex - 1);
+
 }
 
 
@@ -150,21 +164,29 @@ void CSet::Assign(const CSet & rSet)
 	m_iIndex = iSize;
 	for (int i = 0; i < iSize; ++i)
 		m_pArrSet[i] = rSet.m_pArrSet[i];
+
+	// Quick Sort
+	QuickSort(m_pArrSet, 0, m_iIndex - 1);
 }
 
 int CSet::Equal(const CSet & rSet)
 {
 	if (m_iIndex != rSet.m_iIndex)
 		return 0;
-	int j = 0;
+
 	for (int i = 0; i < m_iIndex; ++i)
-	{
-		for (j = 0; j < rSet.m_iIndex; ++j)
-			if (m_pArrSet[i] == rSet.m_pArrSet[j]) // same _> break
-				break;
-		if (j >= rSet.m_iIndex)
-			return  0;
-	}
+		if (m_pArrSet[i] != rSet.m_pArrSet[i])
+			return 0;
+
+	//int j = 0;
+	//for (int i = 0; i < m_iIndex; ++i)
+	//{
+	//	for (j = 0; j < rSet.m_iIndex; ++j)
+	//		if (m_pArrSet[i] == rSet.m_pArrSet[j]) // same _> break
+	//			break;
+	//	if (j >= rSet.m_iIndex)
+	//		return  0;
+	//}
 	return 1;
 }
 
@@ -238,6 +260,22 @@ void CSet::Release()
 	m_iIndex = 0;
 }
 
+int CSet::BinarySearch(int iArray[], int iL, int iR, int iInput) const
+{
+	if (iL >= iR)
+		return iInput == iArray[iL] ? iL : -1;
+
+
+	int iMid = (iR + iL) / 2;
+
+	if (iArray[iMid] == iInput)
+		return iMid;
+	else if (iArray[iMid] > iInput)
+		return BinarySearch(iArray, iL, iMid - 1, iInput);
+	else
+		return BinarySearch(iArray, iMid + 1, iR, iInput);
+}
+
 CSet CSet::symmetricDifference(const CSet & rSet)
 {
 	CSet&& rrDiffer_A = (*this) - rSet;
@@ -264,6 +302,9 @@ CSet * CSet::ToIntersection(const CSet & rSet)
 			// No Is Memeber A Value in B Array
 			m_pArrSet[i--] = m_pArrSet[--m_iIndex];
 	}
+
+	// Quick Sort
+	QuickSort(m_pArrSet, 0, m_iIndex - 1);
 
 	return this;
 }
@@ -304,5 +345,32 @@ int CSet::IsProperSubset(const CSet & rSet)
 		return 0;
 	
 	return IsSubset(rSet);
+}
+
+void CSet::QuickSort(int iArray[], int iL, int iR)
+{
+	if (nullptr == iArray)
+		return;
+
+	if (iL >= iR)
+		return;
+
+	int iB_L = iL;
+	int iB_R = iR;
+
+	int iMid = (iR + iL) / 2;
+	int iMIdVal = iArray[iMid];
+
+	while (iL <= iR)
+	{
+		while (iArray[iL] < iMIdVal) ++iL;
+		while (iArray[iR] > iMIdVal) --iR;
+
+		if(iL <= iR)
+			Swap(iArray[iL++], iArray[iR--]);
+	}
+	
+	QuickSort(iArray, iB_L, iR);
+	QuickSort(iArray, iL, iB_R);
 }
 
