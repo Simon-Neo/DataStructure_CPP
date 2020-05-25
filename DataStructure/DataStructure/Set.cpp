@@ -29,6 +29,7 @@ CSet::CSet(const CSet & rhs)
 CSet::CSet(CSet && rrhs)
 {
 	cout << "CSet::CSet(CSet && rrhs)" << endl;
+
 	m_pArrSet = rrhs.m_pArrSet;
 	m_iIndex = rrhs.m_iIndex;
 	m_iMax = rrhs.m_iMax;
@@ -237,6 +238,21 @@ CSet CSet::operator-(const CSet & rSet) const
 	}
 
 	return cNewSet;
+}
+
+CSet& CSet::operator=(CSet && rrhs)
+{
+	cout << "CSet CSet::operator=(CSet && rrhs)" << endl;
+	
+	Release();
+	m_pArrSet = rrhs.m_pArrSet;
+	m_iIndex = rrhs.m_iIndex;
+	m_iMax = rrhs.m_iMax;
+
+	rrhs.m_pArrSet = nullptr;
+	rrhs.m_iIndex = 0;
+	rrhs.m_iMax = 0;
+	return *this;
 }
 
 

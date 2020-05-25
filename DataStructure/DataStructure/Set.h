@@ -27,6 +27,8 @@ public:
 	CSet Intersection(const CSet& rSet);
 	CSet operator -(const CSet& rSet) const;
 
+	CSet& operator =(CSet&& rrhs);
+
 	void Print();
 
 	void Release();

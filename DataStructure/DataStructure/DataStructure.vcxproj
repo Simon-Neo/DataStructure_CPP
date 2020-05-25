@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="Base.h" />
     <ClInclude Include="BaseArray.h" />
+    <ClInclude Include="BitSet.h" />
     <ClInclude Include="DegreeSort.h" />
     <ClInclude Include="HeapSort.h" />
     <ClInclude Include="MergerSort.h" />
@@ -150,6 +151,7 @@
   <ItemGroup>
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="BaseArray.cpp" />
+    <ClCompile Include="BitSet.cpp" />
     <ClCompile Include="DataStructure.cpp" />
     <ClCompile Include="DegreeSort.cpp" />
     <ClCompile Include="HeapSort.cpp" />

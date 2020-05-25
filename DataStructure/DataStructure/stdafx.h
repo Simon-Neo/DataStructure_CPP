@@ -17,6 +17,10 @@
 
 using namespace std;
 
+
+
+typedef unsigned long BITSET;
+
 template<typename T>
 static void Safe_Delete(T *& rpPtr, bool bIsArray = false)
 {

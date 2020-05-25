@@ -26,6 +26,12 @@
     <Filter Include="Set">
       <UniqueIdentifier>{c2cab53b-c3c6-44fb-88e8-5dc7311c0e0e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Set\SetBasic">
+      <UniqueIdentifier>{41612ae3-ea43-4843-a9b1-46f0b4317e51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Set\BitSet">
+      <UniqueIdentifier>{30055aaa-40e1-4f21-9bf5-40747901d281}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -48,7 +54,10 @@
     </ClInclude>
     <ClInclude Include="DegreeSort.h" />
     <ClInclude Include="Set.h">
-      <Filter>Set</Filter>
+      <Filter>Set\SetBasic</Filter>
+    </ClInclude>
+    <ClInclude Include="BitSet.h">
+      <Filter>Set\BitSet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -70,7 +79,10 @@
     </ClCompile>
     <ClCompile Include="DegreeSort.cpp" />
     <ClCompile Include="Set.cpp">
-      <Filter>Set</Filter>
+      <Filter>Set\SetBasic</Filter>
+    </ClCompile>
+    <ClCompile Include="BitSet.cpp">
+      <Filter>Set\BitSet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -9,6 +9,7 @@
 // MyClass
 #include "BaseArray.h"
 #include "Set.h"
+#include "BitSet.h"
 
 
 int Compare(const int& rA, const int& rB)
@@ -20,45 +21,31 @@ int Compare(const int& rA, const int& rB)
 	else
 		return 0;
 }
-//int(*compare)(const T&, const T&)
 
 int main()
 {
+	//_CrtSetBreakAlloc(281);
 	srand(unsigned int(time(nullptr)));
 	
-	CSet* pSet_A = new CSet(5);
+	CBitSet cBitA;
+	cBitA.Add(1);
+	cBitA.Add(2);
+	cBitA.Add(3);
+	cBitA.Add(7);
 
-	pSet_A->Add(99);
-	pSet_A->Add(7);
-	pSet_A->Add(0);
-	pSet_A->Add(5);
+	cBitA.Print();
 
-
-	cout << "AAAAAAAAAA" << endl;
-	pSet_A->Print();
-
-	CSet* pSet_B = new CSet(7);
-	pSet_B->Add(1);
-	pSet_B->Add(7);
-	pSet_B->Add(55);
-	pSet_B->Add(8);
-	pSet_B->Add(99);
-	pSet_B->Add(77);
-	cout << "BBBBBBB" << endl;
-	pSet_B->Print();
-	
-	//cout << "Equal = " << (pSet_B->Equal(*pSet_A) ? "Equal" : "Not Equal") << endl;
-
-	if (pSet_B->IsMember(55) == -1)
-		cout << "Is not in" << endl;
-	else
-		cout << "Is in" << endl;
+	CBitSet cBitB;
+	cBitB.Add(1);
+	cBitB.Add(2);
+	cBitB.Add(9);
+	cBitB.Add(8);
 
 
-	Safe_Delete(pSet_A);
-	Safe_Delete(pSet_B);
+	cBitB.Print();
 
-	
+	cBitA.SymmetricDifference(cBitB);
+
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     return 0;
 }
